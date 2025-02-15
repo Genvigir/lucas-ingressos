@@ -2,7 +2,7 @@ const app = require("./app");
 const sequelize = require("./database/config");
 const User = require("./models/User");
 const Ticket = require("./models/Ticket");
-const Purchase = require("./models/Purchase"); // Importando modelo de compras
+const Purchase = require("./models/Purchase");
 
 require("dotenv").config();
 
@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 async function startServer() {
   try {
-    await sequelize.sync(); // Sincronizar banco sem apagar os dados
+    await sequelize.sync();
     console.log("Banco de dados sincronizado!");
 
     app.listen(PORT, () => {
