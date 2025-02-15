@@ -1,10 +1,11 @@
 const express = require("express");
 const Ticket = require("../models/Ticket");
+const { verifyToken, isAdmin } = require("../utils/authMiddleware");
 
 const router = express.Router();
 
 // Criar um novo tipo de ingresso (apenas para admin)
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, isAdmin, async (req, res) => {
   try {
     const { name, price, quantity } = req.body;
 
@@ -20,7 +21,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Listar todos os ingressos disponíveis
+// Listar todos os ingressos disponíveis (público)
 router.get("/", async (req, res) => {
   try {
     const tickets = await Ticket.findAll();
@@ -31,7 +32,7 @@ router.get("/", async (req, res) => {
 });
 
 // Atualizar um tipo de ingresso por ID (apenas para admin)
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const { name, price, quantity } = req.body;
@@ -54,7 +55,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Deletar um ingresso por ID (apenas para admin)
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, isAdmin, async (req, res) => {
   try {
     const { id } = req.params;
 

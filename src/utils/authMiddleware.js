@@ -17,4 +17,11 @@ function verifyToken(req, res, next) {
   }
 }
 
-module.exports = { verifyToken };
+function isAdmin(req, res, next) {
+  if (!req.user || !req.user.isAdmin) {
+    return res.status(403).json({ error: "Acesso negado! Apenas administradores podem executar esta ação." });
+  }
+  next();
+}
+
+module.exports = { verifyToken, isAdmin };
