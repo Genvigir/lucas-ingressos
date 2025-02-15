@@ -1,14 +1,14 @@
 const app = require("./app");
 const sequelize = require("./database/config");
-
+const User = require("./models/User");
+const Ticket = require("./models/Ticket"); // Importar o modelo de ingresso
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
 
-// Função para sincronizar o banco antes de iniciar o servidor
 async function startServer() {
   try {
-    await sequelize.sync(); // Remova { force: true } para não apagar os dados a cada execução
+    await sequelize.sync(); // Sincronizar banco sem apagar os dados
     console.log("Banco de dados sincronizado!");
 
     app.listen(PORT, () => {
