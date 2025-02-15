@@ -1,7 +1,9 @@
 const app = require("./app");
 const sequelize = require("./database/config");
 const User = require("./models/User");
-const Ticket = require("./models/Ticket"); // Importar o modelo de ingresso
+const Ticket = require("./models/Ticket");
+const Purchase = require("./models/Purchase"); // Importando modelo de compras
+
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
